@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Create a Portfolio Gallery using HTML and CSS
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        @font-face {
+            font-family: 'Albertsthal Typewriter';
+            src: url('albertsthal-typewriter.regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            padding: 15px;
+            background-image: url('bg4.jpg');
+            background-size: auto;
+            background-repeat: repeat;
+            color: black;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: auto;
+        }
+
+        .inline-image {
+            width: 150px;
+            height: auto;
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 8px 0;
+            text-align: center;
+            transform: translateY(25%);
+        }
+
+        .column {
+            flex: 0 1 20%;
+            padding: 6px;
+            position: relative;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .column:hover {
+            flex: 0 1 25%;
+            top: -20px;
+            box-shadow: 0 14px 8px rgba(0, 128, 0, 0.5);
+        }
+
+        .title {
+            text-align: center;
+            width: 100%;
+            padding: 5px 0;
+        }
+
+        .title-container {
+            background-image: url('grungewall.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 20px 0;
+        }
+
+        .heart {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%;
+            overflow: hidden;
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+
+        .heart img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            transition: transform 0.3s;
+        }
+
+        .heart img:hover {
+            transform: scale(1.1);
+        }
+
+        .heart::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            background-color: rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s;
+        }
+
+        .heart:hover::before {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .content h3,
+        .content p {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: black;
+            margin: 0;
+            padding: 0 10px;
+            z-index: 1;
+        }
+
+        .content h3 {
+            font-size: 30px;
+        }
+
+        .custom-font {
+            font-family: 'Albertsthal Typewriter', Arial, sans-serif;
+        }
+
+        a:link,
+        a:visited,
+        a:hover,
+        a:active {
+            color: black;
+            text-decoration: none;
+        }
+
+        .project-title {
+            font-size: 40px;
+            margin: 20px 0;
+            width: 20%
+            padding: 10px;
+            background-color: white;
+	    
+        }
+
+        .content-box {
+            position: absolute;
+            top: 65.5%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 125%;
+            padding: 10px;
+            background-color: white;
+            opacity: 0.8;
+            text-align: center;
+	    font-family: 'Albertsthal Typewriter', Arial, sans-serif;
+	    font-weight: bold;
+        }
+
+        .content-box p {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Title and tag -->
+    <div class="title-container">
+        <div class="title">
+            <img src="logo2.png" alt="Logo" style="max-height: 250px;">
+        </div>
+        <hr>
+    </div>
+    <div class="container">
+
+        <div class="project-title custom-font"> Webpage Projects</div>
+
+        <div class="clear"></div>
+
+        <div class="row">
+            <div class="column">
+                <div class="heart">
+                    <img src="gradient2.jpg" alt="">
+                    <div class="content">
+                        <h3 class="custom-font"><a href="cdplayer.html">Music Store</a></h3>
+                        <div class="content-box">
+                            <p>an interactive webpage w/ audio</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="heart">
+                    <img src="gradient2.jpg" alt="">
+                    <div class="content">
+                        <h3 class="custom-font"><a href="parallax.html">Parallax Page</a></h3>
+                        <div class="content-box">
+                            <p>a stylized page with CSS</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="heart">
+                    <img src="gradient2.jpg" alt="">
+                    <div class="content">
+                        <h3 class="custom-font"><a href="photography.html">Photo Gallery</a></h3>
+                        <div class="content-box">
+                            <p>a stylized gallery w/ JS + CSS</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="heart">
+                    <img src="gradient2.jpg" alt="">
+                    <div class="content">
+                        <h3 class="custom-font"><a href="restaurant.html">Restaurant Menu</a></h3>
+                        <div class="content-box">
+                            <p>an interactive menu page</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
