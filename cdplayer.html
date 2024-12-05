@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Player</title>
+    <style>
+        /* Styling the body */
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Styling the background image */
+        .container {
+            height: 100vh;
+            width: 100%;
+            background-image: url('acbusgroovy.gif');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        /* Navigation styling */
+        .nav {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .nav li {
+            float: right;
+            list-style: none;
+            margin-left: 10px;
+        }
+
+        .nav a {
+            height: 50px;
+            line-height: 50px;
+            font-size: 1rem;
+            font-weight: 550;
+            display: block;
+            padding: 0 20px;
+            color: white;
+            text-decoration: none;
+            background-color: 	#F88379;
+            border-radius: 25px;
+            text-align: center;
+        }
+
+        /* Content styling */
+        .content {
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Aligns items vertically */
+        }
+
+        .left-col {
+            text-align: left; /* Ensures text aligns left */
+            margin-right: 20px; /* Adds some space between columns */
+        }
+
+        .left-col h1 {
+            font-size: 50px;
+            color: crimson;
+        }
+
+        .scrolling-text {
+            white-space: nowrap; /* Prevents text wrapping */
+            overflow: hidden; /* Hides overflow text */
+            display: inline-block;
+            animation: scroll 10s linear infinite; /* Adjust duration as needed */
+            font-size: 24px; /* Size of the scrolling text */
+            color: #32CD32; /* Bright green color */
+            margin-left: 5px; /* Space between the heading and scrolling text */
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .right-col {
+            display: flex;
+            align-items: center;
+            margin-left: 20px; /* Adds some space between columns */
+        }
+
+        .right-col p {
+            font-size: 21px;
+            color: black;
+            font-weight: 650;
+            margin-right: 20px;
+	    color:	#32CD32;
+        }
+
+        /* Spinning image styles */
+        .spin {
+            width: 500px; /* Adjust size as needed */
+            animation: spin 5s linear infinite;
+            margin-top: 20px; /* Adds space above the image */
+        }
+
+        /* Adjusting size for the spinning star */
+        #icon {
+            width: 50px; /* Change to desired width */
+            height: auto; /* Maintains aspect ratio */
+            cursor: pointer;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <ul class="nav">
+            <li><a href="#">CONTACT</a></li>
+            <li><a href="#">ABOUT</a></li>
+            <li><a href="#">ARTISTS</a></li>
+            <li><a href="#">MUSIC</a></li>
+            <li><a href="#">HOME</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="left-col">
+            <span class="scrolling-text">🎶 07. Player Select (K.K. Slider).mp3 🎶</span>
+        </div>
+
+        <div class="right-col">
+            <p>Click Here To Listen</p>
+            <img src="spinningstar.gif" id="icon">
+        </div>
+
+        <!-- Spinning image -->
+        <img src="sonycd.png" alt="Spinning Image" class="spin">
+    </div>
+
+    <audio id="mysound">
+        <source src="07. Player Select (K.K. Slider).mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        let mysound = document.getElementById("mysound");
+        let icon = document.getElementById("icon");
+
+        icon.onclick = function () {
+            if (mysound.paused) {
+                mysound.play().catch(function (error) {
+                    console.log("Error playing audio:", error);
+                });
+                icon.src = "spinningstar.gif";
+            } else {
+                mysound.pause();
+                icon.src = "spinningstar.gif"; // Change this to your play icon
+            }
+        }
+    </script>
+</body>
+
+</html>
