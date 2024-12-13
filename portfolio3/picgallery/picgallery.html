@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            background-image: url('bg.jpg');
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            position: relative; /* Needed for absolute positioning of GIF */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 5rem;
+        }
+
+        /* Gallery Grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 200px; /* Fixed height for all images */
+            object-fit: cover; /* Ensures images maintain their aspect ratio */
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.3s ease-in-out;
+            border-radius: 8px;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0, 0, 0, 0.9); 
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 800px;
+            margin-top: 50px;
+            border-radius: 8px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Image Caption (Optional) */
+        .gallery img::after {
+            content: attr(alt);
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 5px;
+            font-size: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .gallery img:hover::after {
+            opacity: 1;
+        }
+
+        /* GIF styles */
+        .gif {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 100px; /* Adjust size of the GIF */
+            height: auto;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+<h1>[Bₐₛᵢₗ'ₛ ₚₕₒₜₒ ₐₗbᵤₘ!]</h1>
+
+<div class="gallery">
+    <img src="omori1.jpg" alt="omori1" onclick="openModal(this)">
+    <img src="omori2.jpg" alt="omori2" onclick="openModal(this)">
+    <img src="omori3.jpg" alt="omori3" onclick="openModal(this)">
+    <img src="omori4.jpg" alt="omori4" onclick="openModal(this)">
+    <img src="omori5.jpg" alt="omori5" onclick="openModal(this)">
+    <img src="omori6.jpg" alt="omori6" onclick="openModal(this)">
+    <img src="omori7.jpg" alt="omori7" onclick="openModal(this)">
+    <img src="omori8.jpg" alt="omori8" onclick="openModal(this)">
+    <img src="omori9.jpg" alt="omori9" onclick="openModal(this)">
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="img01">
+</div>
+
+<!-- GIF at the bottom-right corner -->
+<img src="something.gif" alt="something" class="gif">
+
+<script>
+    // Open Modal
+    function openModal(img) {
+        const modal = document.getElementById("myModal");
+        const modalImg = document.getElementById("img01");
+        modal.style.display = "block";
+        modal.style.opacity = "1"; // Show the modal
+        modalImg.src = img.src;
+    }
+
+    // Close Modal
+    function closeModal() {
+        const modal = document.getElementById("myModal");
+        modal.style.opacity = "0"; // Fade out the modal
+        setTimeout(() => {
+            modal.style.display = "none"; // Hide modal after fade-out
+        }, 300); // Time matches the fade-out duration
+    }
+
+    // Close the modal when clicking outside the image
+    const modal = document.getElementById("myModal");
+    modal.onclick = function(event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    }
+
+    // Close the modal using the Escape key
+    window.addEventListener("keydown", function(event) {
+        if (event.key === "Escape") {
+            closeModal();
+        }
+    });
+</script>
+
+</body>
+</html>
+

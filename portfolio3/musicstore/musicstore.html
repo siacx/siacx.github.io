@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <style>
+        /* Styling the body */
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Styling the background image */
+        .container {
+            height: 100vh;
+            width: 100%;
+            background-image: url('nightbg.gif');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        /* Navigation styling */
+        .nav {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .nav li {
+            float: right;
+            list-style: none;
+            margin-left: 10px;
+        }
+
+        .nav a {
+            height: 50px;
+            line-height: 50px;
+            font-size: 1rem;
+            font-weight: 550;
+            display: block;
+            padding: 0 20px;
+            color: white;
+            text-decoration: none;
+            background-color: #BE0E3A;
+            border-radius: 25px;
+            text-align: center;
+        }
+
+        /* Content styling */
+        .content {
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .playlist {
+            width: 80%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .playlist h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: crimson;
+        }
+
+        .playlist ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .playlist li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .playlist li:hover {
+            background-color: #f0f0f0;
+        }
+
+        .playing {
+            color: #d51042;
+        }
+
+        .audio-controls {
+            margin-top: 20px;
+        }
+
+        .audio-controls img {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <ul class="nav">
+            <li><a href="#">CONTACT</a></li>
+            <li><a href="#">ABOUT</a></li>
+            <li><a href="#">ARTISTS</a></li>
+            <li><a href="#">MUSIC</a></li>
+            <li><a href="#">HOME</a></li>
+        </ul>
+
+        <div class="content">
+            <div class="playlist">
+                <h1>My Mini Playlist</h1>
+                <ul id="trackList">
+                    <li data-src="Mitsume - Spare.mp3">スペア (Spare) - Mitsume</li>
+                    <li data-src="Sunset Rollercoaster - Let There Be Light Again.mp3">Let There Be Light Again - Sunset Rollercoaster</li>
+                    <li data-src="PRYVT - blue salvia.mp3">blue salvia - PRYVT</li>
+                    <li data-src="Tron - Veranda.mp3">Veranda - Tron</li>
+                    <li data-src="julie - very little effort.mp3">very little effort - julie</li>
+                </ul>
+                <div class="audio-controls">
+                    <img src="play.png" id="playPauseBtn" alt="Play/Pause Button">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audioPlayer">
+        <source id="audioSource" src="" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const trackList = document.getElementById('trackList');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const audioSource = document.getElementById('audioSource');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+
+        let currentTrack = null;
+
+        trackList.addEventListener('click', function (e) {
+            if (e.target.tagName === 'LI') {
+                if (currentTrack) {
+                    currentTrack.classList.remove('playing');
+                }
+                currentTrack = e.target;
+                currentTrack.classList.add('playing');
+                audioSource.src = currentTrack.getAttribute('data-src');
+                audioPlayer.load();
+                audioPlayer.play();
+                playPauseBtn.src = 'pause.png'; // Change to your pause icon
+            }
+        });
+
+        playPauseBtn.addEventListener('click', function () {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                playPauseBtn.src = 'pause.png'; // Change to your pause icon
+            } else {
+                audioPlayer.pause();
+                playPauseBtn.src = 'play.png'; // Change to your play icon
+            }
+        });
+
+        audioPlayer.addEventListener('ended', function () {
+            playPauseBtn.src = 'play.png'; // Change to your play icon
+        });
+    </script>
+</body>
+
+</html>
+
